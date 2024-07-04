@@ -50,6 +50,10 @@ function loadData()
     const bounds = map.getBounds();
     if (bounds) {
         const areaInKm = calculateVisibleLandArea(bounds) * 1.5;
+        if (areaInKm > 150) {
+            clearMarkers();
+            return;
+        }
         url += '&radius=' + areaInKm;
     }
 
