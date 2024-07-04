@@ -23,12 +23,12 @@ function loadMap()
                 const newCenter = map.getCenter();
                 if (!currentCenter.equals(newCenter)) {
                     currentCenter = newCenter;
-                    loadData(currentCenter);
+                    loadData();
                 }
             });
 
             searchInput.onchange = () => {
-                loadData(currentCenter);
+                loadData();
             }
         }
         document.head.appendChild(script);
@@ -38,9 +38,9 @@ function loadMap()
 
 loadMap();
 
-function loadData(location)
+function loadData()
 {
-    var url = apiHost + '/api/v1/gyms/?lat=' + location.lat() + '&lng=' + location.lng();
+    var url = apiHost + '/api/v1/gyms/?lat=' + currentCenter.lat() + '&lng=' + currentCenter.lng();
     if (searchInput.value != null) url += '&word=' + searchInput.value;
     console.log(url);
 }
