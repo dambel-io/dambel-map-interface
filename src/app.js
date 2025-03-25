@@ -89,8 +89,14 @@ function loadData()
                 var content = "<p>";
                 content += "<h4>" + gym.name + "</h4>";
                 content += "<span style='color: " + color + "'>" + workingStatusTitle + "</span>";
+                if (gym.show_crowd && color == 'green') {
+                    content += " <b>(" + gym.crowd + " people are currently in this gym)</b>";
+                }
                 if (gym.description != null) {
                     content += "<p>" + gym.description + "</p>";
+                }
+                if (gym.address != null) {
+                    content += "<p><b>Address: </b>" + gym.address + "</p>";
                 }
                 content += "</p>";
                 const infoWindow = new google.maps.InfoWindow({
