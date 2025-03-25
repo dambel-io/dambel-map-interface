@@ -13,7 +13,7 @@ function loadMap()
         script.onload = () => {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: new google.maps.LatLng(mapCenterLat, mapCenterLng),
-                zoom: 15,
+                zoom: 6,
                 mapTypeControl: false,
                 streetViewControl: false,
                 fullscreenControl: false,
@@ -32,6 +32,8 @@ function loadMap()
                 clearMarkers();
                 loadData();
             }
+
+            loadData();
         }
         document.head.appendChild(script);
     };
@@ -50,34 +52,52 @@ function loadData()
     const bounds = map.getBounds();
     if (bounds) {
         const areaInKm = calculateVisibleLandArea(bounds) * 1.5;
-        if (areaInKm > 150) {
-            clearMarkers();
-            return;
-        }
         url += '&radius=' + areaInKm;
     }
 
     fetch(url).then(res => res.json()).then(res => {
         for (var i = 0; i < res.data.length; i++) {
-            var gymPosition = { lat: parseFloat(res.data[i].location_lat), lng: parseFloat(res.data[i].location_lng) };
+            const gym = res.data[i];
+            var gymPosition = { lat: parseFloat(gym.location_lat), lng: parseFloat(gym.location_lng) };
             let color;
-            if (res.data[i].working_status == null) {
+            let workingStatusTitle = '';
+            if (gym.working_status == null) {
                 color = 'red';
-            } else if (res.data[i].working_status.current !== undefined) {
+                workingStatusTitle = "Closed";
+            } else if (gym.working_status.current !== undefined) {
                 color = 'green';
-            } else if (res.data[i].working_status.next !== undefined) {
-                color = 'yellow';
+                workingStatusTitle = "Open till " + gym.working_status.current.closes_at;
+            } else if (gym.working_status.next !== undefined) {
+                color = 'orange';
+                workingStatusTitle = "Will open by " + gym.working_status.next.opens_at;
             } else {
                 color = 'red';
+                workingStatusTitle = "Closed";
             }
 
-            gymMarkers.push(new google.maps.Marker({
+            const marker = new google.maps.Marker({
                 position: gymPosition,
                 map: map,
                 icon: {
                     url: `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`,
                 },
-            }));
+            });
+
+            gymMarkers.push(marker);
+
+            marker.addListener("click", () => {
+                var content = "<p>";
+                content += "<h4>" + gym.name + "</h4>";
+                content += "<span style='color: " + color + "'>" + workingStatusTitle + "</span>";
+                if (gym.description != null) {
+                    content += "<p>" + gym.description + "</p>";
+                }
+                content += "</p>";
+                const infoWindow = new google.maps.InfoWindow({
+                    content: content,
+                });
+                infoWindow.open(map, marker);
+            });
         }
     });
 }
