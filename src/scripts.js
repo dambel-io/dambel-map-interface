@@ -143,3 +143,8 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
 function toRad(deg) {
     return deg * (Math.PI / 180);
 }
+
+var toggleDarkMode = document.getElementById('toggle-dark-mode');
+toggleDarkMode.onclick = (function () {
+    document.body.classList.toggle('dark-mode');
+});

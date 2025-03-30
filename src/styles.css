@@ -1,0 +1,94 @@
+* {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: #ededed;
+    color: #343434;
+    transition: all 0.4s;
+    padding: 0;
+    margin: 0;
+}
+body.dark-mode {
+    background-color: #343434;
+    color: #ededed;
+}
+
+.container {
+    padding: 0 20px;
+}
+
+#dark-mode-toggle-div {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+#logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
+    background-image: url('https://raw.githubusercontent.com/dambel-io/dambel-logo/master/files/main.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+}
+
+#search-input {
+    width: 70%;
+    padding: 20px;
+    border: 0;
+    outline: 0;
+    border-radius: 15px;
+}
+.dark-mode #search-input {
+    background-color: #565656;
+    color: white;
+}
+
+#map {
+    width: 100%;
+    height: 80%;
+    margin: 20px 0;
+}
+
+.element {
+    background:
+        radial-gradient(circle at top left, #99ff99, transparent),
+        radial-gradient(circle at bottom right, #ffff99, transparent),
+        linear-gradient(135deg, #00ff88, #ffea00);
+    transition: all 0.5s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+}
+.element:hover {
+    background:
+      radial-gradient(circle at top left, #333, transparent),
+      radial-gradient(circle at bottom right, #ff5555, transparent),
+      linear-gradient(135deg, #000, #ff0000);
+    color: white;
+}
+.element:active {
+    transform: scale(0.7);
+}
+.dark-mode .element {
+    box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1), 0px 1px 3px rgba(255, 255, 255, 0.08);
+}
+
+.input {
+    height: 50px;
+    transition: all 0.7s;
+}
+.input:active {
+    transform: scale(0.9);
+}
+
+.button {
+    border: 0;
+    outline: 0;
+    padding: 15px;
+    border-radius: 10px;
+    height: 50px;
+}
