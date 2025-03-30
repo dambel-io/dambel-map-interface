@@ -62,7 +62,7 @@ body.dark-mode {
         radial-gradient(circle at top left, #99ff99, transparent),
         radial-gradient(circle at bottom right, #ffff99, transparent),
         linear-gradient(135deg, #00ff88, #ffea00);
-    transition: all 0.5s;
+    transition: all 0.3s;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
 }
 .element:hover {
@@ -73,7 +73,7 @@ body.dark-mode {
     color: white;
 }
 .element:active {
-    transform: scale(0.7);
+    transform: scale(0.9);
 }
 .dark-mode .element {
     box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1), 0px 1px 3px rgba(255, 255, 255, 0.08);
@@ -81,10 +81,10 @@ body.dark-mode {
 
 .input {
     height: 50px;
-    transition: all 0.7s;
+    transition: all 0.3s;
 }
 .input:active {
-    transform: scale(0.9);
+    transform: scale(0.95);
 }
 
 .button {
