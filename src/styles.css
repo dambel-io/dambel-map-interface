@@ -50,9 +50,11 @@ body.dark-mode {
 }
 
 #map {
-    width: 100%;
+    width: 75%;
     height: 80%;
     margin: 20px 0;
+    margin: auto;
+    margin-top: 20px;
 }
 
 .element {
